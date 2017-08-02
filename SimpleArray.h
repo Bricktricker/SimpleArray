@@ -1,7 +1,6 @@
 #ifndef SIMPLE_ARRAY_H
 #define SIMPLE_ARRAY_H
 
-#include <cstddef>
 #include <cstring>
 #include <stdexcept>
 
@@ -22,14 +21,14 @@ public:
     }
 
     T& at(const size_t pos){
-        if(pos &lt; size){
+        if(pos < m_size){
             return m_data[pos];
         }
         throw std::out_of_range("SimpleArray out of Range");
     }
 
     const T& at(const size_t pos) const {
-        if(pos &lt; m_size){
+        if(pos < m_size){
             return m_data[pos];
         }
         throw std::out_of_range("SimpleArray out of Range");
@@ -72,8 +71,6 @@ private:
     T* m_data;
 };
 
-
-  
 }
 
 #endif
