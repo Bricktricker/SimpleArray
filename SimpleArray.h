@@ -1,7 +1,7 @@
 #ifndef SIMPLE_ARRAY_H
 #define SIMPLE_ARRAY_H
 
-#include <stdexcept> //size_t
+#include <stdexcept> //size_t, std::out_of_range
 
 namespace ph{
 
