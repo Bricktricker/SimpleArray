@@ -14,6 +14,14 @@ public:
     {
         m_data = new T[size];
     }
+	
+    //Copy Constructor
+    SimpleArray(const SimpleArray& arr)
+    : m_size(arr.m_size)
+    {
+	m_data = new T[m_size];
+	//Memory copy
+    }
     
     //Destructor
     ~SimpleArray(){
