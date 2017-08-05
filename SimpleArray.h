@@ -1,19 +1,17 @@
 #ifndef SIMPLE_ARRAY_H
 #define SIMPLE_ARRAY_H
 
-#include <cstring>
-#include <stdexcept>
+#include <stdexcept> //size_t
 
 namespace ph{
 
 template<class T>
 class SimpleArray{
 public:
-    explicit SimpleArray(const size_t _size)
-    : m_size(_size), m_data(nullptr)
+    explicit SimpleArray(const size_t size)
+    : m_size(size), m_data(nullptr)
     {
-        m_data = new T[_size];
-        memset(m_data, 0, _size * sizeof(T));
+        m_data = new T[size];
     }
 
     ~SimpleArray(){
