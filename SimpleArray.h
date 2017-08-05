@@ -8,16 +8,19 @@ namespace ph{
 template<class T>
 class SimpleArray{
 public:
+    //Constructor
     explicit SimpleArray(const size_t size)
     : m_size(size), m_data(nullptr)
     {
         m_data = new T[size];
     }
-
+    
+    //Destructor
     ~SimpleArray(){
         delete[] m_data;
     }
 
+    //Element access
     T& at(const size_t pos){
         if(pos < m_size){
             return m_data[pos];
@@ -56,6 +59,7 @@ public:
         return m_data[m_size - 1];
     }
 
+    //Capacity
     const size_t size() const noexcept {
         return m_size;
     }
@@ -63,6 +67,10 @@ public:
     const bool empty() const noexcept {
         return m_size == 0;
     }
+    
+    constexpr size_t max_size() noexcept {
+		return ~(0U);
+	}
 
 private:
     size_t m_size;
