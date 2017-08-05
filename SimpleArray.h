@@ -2,12 +2,27 @@
 #define SIMPLE_ARRAY_H
 
 #include <stdexcept> //size_t, std::out_of_range
+#include <iterator> // std::iterator, std::input_iterator_tag
 
 namespace ph{
 
 template<class T>
 class SimpleArray{
 public:
+    //Iterator
+    class Iterator : public std::iterator<std::input_iterator_tag, T>{
+    public:
+	Iterator(T* x) :p(x) {}
+  	Iterator(const Iterator& mit) : p(mit.p) {}
+  	Iterator& operator++() {++p;return *this;}
+  	Iterator operator++(int) {Iterator tmp(*this); operator++(); return tmp;}
+  	bool operator==(const Iterator& rhs) const {return p==rhs.p;}
+  	bool operator!=(const Iterator& rhs) const {return p!=rhs.p;}
+  	T& operator*() {return *p;}
+    private:
+	T* p;
+    };
+	
     //Constructor
     explicit SimpleArray(const size_t size)
     : m_size(size), m_data(nullptr)
@@ -78,7 +93,16 @@ public:
     
     constexpr size_t max_size() noexcept {
 		return ~(0U);
-	}
+    }
+	
+    //Iteratoren
+    Iterator begin() noexcept {
+	return Iterator(m_data);
+    }
+
+    const Iterator begin() const noexcept {
+	return Iterator(m_data);
+    }
 
 private:
     size_t m_size;
