@@ -28,7 +28,8 @@ public:
     explicit SimpleArray(const size_t size)
     : m_size(size), m_data(nullptr)
     {
-        m_data = new T[size];
+	if(size > 0)
+             m_data = new T[size];
     }
 	
     //Copy Constructor
