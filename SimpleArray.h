@@ -105,8 +105,8 @@ public:
         return m_size == 0;
     }
     
-    constexpr size_t max_size() noexcept {
-		return ~(0U);
+    constexpr size_t max_size() const noexcept {
+	return ~(0U);
     }
 	
     //Iteratoren
