@@ -3,6 +3,7 @@
 
 #include <stdexcept> //size_t, std::out_of_range
 #include <iterator> // std::iterator, std::input_iterator_tag
+#include <algorithm> //std::copy
 
 namespace ph{
 
@@ -35,8 +36,21 @@ public:
     : m_size(arr.m_size)
     {
 	m_data = new T[m_size];
-	//Memory copy
+	std::copy(arr.m_data, arr.m_data + m_size, m_data);
     }
+	
+     //Assignment operator
+     SimpleArray& operator=(SimpleArray other){
+	swap(*this, other);
+	return *this;
+     }
+
+     //move Constructor
+     SimpleArray(SimpleArray&& other)
+	:SimpleArray()
+     {
+	swap(*this, other);
+     };
     
     //Destructor
     ~SimpleArray(){
@@ -103,6 +117,14 @@ public:
     const Iterator begin() const noexcept {
 	return Iterator(m_data);
     }
+	
+     //swap
+     //from: https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom
+     friend void swap(SimpleArray& first, SimpleArray& second){
+	     using std::swap;
+	     swap(first.m_size, second.m_size);
+	     swap(first.m_data, second.m_data);
+     }
 
 private:
     size_t m_size;
