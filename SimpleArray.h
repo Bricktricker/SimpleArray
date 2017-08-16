@@ -117,6 +117,14 @@ public:
     const Iterator begin() const noexcept {
 	return Iterator(m_data);
     }
+
+    Iterator end() noexcept {
+        return Iterator(m_data + m_size);
+    }
+
+    const Iterator end() const noexcept {
+        return Iterator(m_data + m_size);
+    }
 	
      //swap
      //from: https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom
