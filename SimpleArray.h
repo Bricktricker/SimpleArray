@@ -96,6 +96,14 @@ public:
     const T& back() const {
         return m_data[m_size - 1];
     }
+	
+    T* data() noexcept {
+        return m_data;
+    }
+
+    const T* data() const noexcept {
+        return m_data;
+    }
 
     //Capacity
     const size_t size() const noexcept {
@@ -127,13 +135,18 @@ public:
         return Iterator(m_data + m_size);
     }
 	
-     //swap
+     //Modifieres
      //from: https://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom
      friend void swap(SimpleArray& first, SimpleArray& second){
 	     using std::swap;
 	     swap(first.m_size, second.m_size);
 	     swap(first.m_data, second.m_data);
      }
+	
+    void fill(const T& val){
+        using std::fill;
+        std::fill(begin(), end(), val);
+    }
 
 private:
     size_t m_size;
